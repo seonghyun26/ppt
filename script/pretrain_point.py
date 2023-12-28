@@ -49,7 +49,7 @@ if __name__ == "__main__":
         cfg.dataset.pop("species_start")
         cfg.dataset.pop("species_end")
     dataset = core.Configurable.load_config_dict(cfg.dataset)
-    solver = util.build_pretrain_solver(cfg, dataset)
+    solver = util.build_pretrain_point_solver(cfg, dataset)
 
     step = cfg.get("save_interval", 1)
     for i in range(0, cfg.train.num_epoch, step):

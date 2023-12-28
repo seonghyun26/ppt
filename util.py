@@ -178,3 +178,25 @@ def build_pretrain_solver(cfg, dataset):
     solver = core.Engine(task, dataset, None, None, optimizer, **cfg.engine)
     
     return solver
+
+def build_pretrain_point_solver(cfg, dataset):
+    if comm.get_rank() == 0:
+        logger.warning(dataset)
+        logger.warning("#dataset: %d" % (len(dataset)))
+
+    task = core.Configurable.load_config_dict(cfg.task)
+    if "fix_sequence_model" in cfg:
+        if cfg.task["class"] == "Unsupervised":
+            model_dict = cfg.task.model.model
+        else:
+            model_dict = cfg.task.model 
+        assert model_dict["class"] == "FusionNetwork"
+        for p in task.model.model.sequence_model.parameters():
+            p.requires_grad = False
+    cfg.optimizer.params = [p for p in task.parameters() if p.requires_grad]
+    optimizer = core.Configurable.load_config_dict(cfg.optimizer)
+    
+    # TODO: 
+    solver = core.Engine(task, dataset, None, None, optimizer, **cfg.engine)
+    
+    return solver
