@@ -1,0 +1,66 @@
+{
+  // Use IntelliSense to learn about possible attributes.
+  // Hover to view descriptions of existing attributes.
+  // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "name": "gear-pretrain-proteincode",
+      "type": "python",
+      "request": "launch",
+      "program": "./script/pretrain.py",
+      "args": [
+        "-c",
+        "config/pretrain/attr_gearnet_edge+proteincode.yaml",
+        "--gpus",
+        "[1]"
+      ],
+      "console": "integratedTerminal",
+      "justMyCode": false
+    },
+    {
+      "name": "pretrain-mini-test",
+      "type": "python",
+      "request": "launch",
+      "program": "./script/pretrain.py",
+      "args": [
+        "-c",
+        "config/pretrain/attr_gearnet_edge-mini-random.yaml",
+        "--gpus",
+        "[0]"
+      ],
+      "console": "integratedTerminal",
+      "justMyCode": false
+    },
+    {
+      "name": "pretrain-mini-original",
+      "type": "python",
+      "request": "launch",
+      "program": "./script/pretrain.py",
+      "args": [
+        "-c",
+        "config/pretrain/attr_gearnet_edge-mini.yaml",
+        "--gpus",
+        "[3]"
+      ],
+      "console": "integratedTerminal",
+      "justMyCode": false
+    },
+    {
+      "name": "downstream-ec",
+      "type": "python",
+      "request": "launch",
+      "program": "./script/downstream.py",
+      "args": [
+        "-c",
+        "config/downstream/EC/gearnet_edge.yaml",
+        "--ckpt",
+        "/home/shpark/prj-protein-rep/GearNet/config/checkpoint/attr_gearnet_edge.pth",
+        "--gpus",
+        "[6]"
+      ],
+      "console": "integratedTerminal",
+      "justMyCode": true
+    }
+  ]
+}

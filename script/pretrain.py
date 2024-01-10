@@ -28,7 +28,6 @@ def save(solver, path):
 
 
 if __name__ == "__main__":
-    print("GOOD")
     args, vars = util.parse_args()
     cfg = util.load_config(args.config, context=vars)
     working_dir = util.create_working_directory(cfg)
@@ -48,7 +47,16 @@ if __name__ == "__main__":
         cfg.dataset.split_id = 0
         cfg.dataset.pop("species_start")
         cfg.dataset.pop("species_end")
+    elif species_end == species_start:
+        cfg.dataset.species_id = species_start
+        cfg.dataset.split_id = 0
+        cfg.dataset.pop("species_start")
+        cfg.dataset.pop("species_end")
+        
+    # Load dataset
     dataset = core.Configurable.load_config_dict(cfg.dataset)
+    
+    # Load model
     solver = util.build_pretrain_solver(cfg, dataset)
 
     step = cfg.get("save_interval", 1)

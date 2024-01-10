@@ -1,0 +1,70 @@
+{
+    "arabidopsis_thaliana": {
+        "code": "UP000006548_3702_ARATH",
+        "number": 27386
+    },
+    "caenorhabditis_elegans": {
+        "code": "UP000001940_6239_CAEEL",
+        "number": 19613
+    },
+    "candida_albicans": {
+        "code": "UP000000559_237561_CANAL",
+        "number": 5951
+    },
+    "danio_rerio": {
+        "code": "UP000000437_7955_DANRE",
+        "number": 24430
+    },
+    "dictyostelium_discoideum": {
+        "code": "UP000002195_44689_DICDI",
+        "number": 12485
+    },
+    "drosophila_melanogaster": {
+        "code": "UP000000803_7227_DROME",
+        "number": 13318
+    },
+    "escherichia_coli": {
+        "code": "UP000000625_83333_ECOLI",
+        "number": 4362
+    },
+    "glycine_max": {
+        "code": "UP000008827_3847_SOYBN",
+        "number": 55696
+    },
+    "homo_sapiens": {
+        "code": "UP000005640_9606_HUMAN",
+        "number": 23172
+    },
+    "methanocaldococcus_jannaschii": {
+        "code": "UP000000805_243232_METJA",
+        "number": 1773
+    },
+    "mus_musculus": {
+        "code": "UP000000589_10090_MOUSE",
+        "number": 21398
+    },
+    "oryza_sativa": {
+        "code": "UP000059680_39947_ORYSJ",
+        "number": 43631
+    },
+    "rattus_norvegicus": {
+        "code": "UP000002494_10116_RAT",
+        "number": 21069
+    },
+    "saccharomyces_cerevisiae": {
+        "code": "UP000002311_559292_YEAST",
+        "number": 6016
+    },
+    "schizosaccharomyces_pombe": {
+        "code": "UP000002485_284812_SCHPO",
+        "number": 5104
+    },
+    "zea_mays": {
+        "code": "UP000007305_4577_MAIZE",
+        "number": 39203
+    },
+    "swissprot": {
+        "code": "swissprot_pdb",
+        "number": 541143
+    }
+}

@@ -119,8 +119,21 @@ def build_downstream_solver(cfg, dataset):
         cfg.scheduler.optimizer = optimizer
         scheduler = core.Configurable.load_config_dict(cfg.scheduler)
         cfg.engine.scheduler = scheduler
-
-    solver = core.Engine(task, train_set, valid_set, test_set, optimizer, **cfg.engine)
+    
+    # NOTE: Configuration for wandb name
+    run_name=""
+    if cfg.get("logger") is None or cfg.logger.get("wandb") is None:
+        logger_type="logging"
+    else:
+        logger_type = "wandb"
+        if cfg.logger.get("name") is None:
+            task_branch = "-"+str(cfg.dataset["branch"]) if cfg.dataset.get("branch") is not None else ""
+            pretrainTask = "-"+str(cfg.model_checkpoint).split('/')[-5] if cfg.get("model_checkpoint") is not None else ""
+            run_name += str(cfg.dataset["class"]) + task_branch + pretrainTask
+        else:
+            run_name += cfg.logger["name"]
+        
+    solver = core.Engine(task, train_set, valid_set, test_set, optimizer, **cfg.engine, logger=logger_type, wandb_name=run_name)
 
     if "lr_ratio" in cfg:
         cfg.optimizer.params = [
@@ -175,28 +188,17 @@ def build_pretrain_solver(cfg, dataset):
             p.requires_grad = False
     cfg.optimizer.params = [p for p in task.parameters() if p.requires_grad]
     optimizer = core.Configurable.load_config_dict(cfg.optimizer)
-    solver = core.Engine(task, dataset, None, None, optimizer, **cfg.engine)
     
-    return solver
-
-def build_pretrain_point_solver(cfg, dataset):
-    if comm.get_rank() == 0:
-        logger.warning(dataset)
-        logger.warning("#dataset: %d" % (len(dataset)))
-
-    task = core.Configurable.load_config_dict(cfg.task)
-    if "fix_sequence_model" in cfg:
-        if cfg.task["class"] == "Unsupervised":
-            model_dict = cfg.task.model.model
-        else:
-            model_dict = cfg.task.model 
-        assert model_dict["class"] == "FusionNetwork"
-        for p in task.model.model.sequence_model.parameters():
-            p.requires_grad = False
-    cfg.optimizer.params = [p for p in task.parameters() if p.requires_grad]
-    optimizer = core.Configurable.load_config_dict(cfg.optimizer)
-    
-    # TODO: 
-    solver = core.Engine(task, dataset, None, None, optimizer, **cfg.engine)
+    run_name=""
+    if cfg.logger.get("wandb") is None:
+        logger_type="logging"
+    else:
+        logger_type = "wandb"
+        if cfg.logger.get("name") is not None:
+            run_name += cfg.logger["name"]+"-"
+        pretrainTask = "-"+str(cfg.task["class"])
+        run_name += str(cfg.dataset["class"]) + pretrainTask
+        
+    solver = core.Engine(task, dataset, None, None, optimizer, **cfg.engine, logger=logger_type, wandb_name=run_name)
     
     return solver
