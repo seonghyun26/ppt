@@ -3,8 +3,8 @@ output_dir: ~/scratch/protein_outputs
 dataset:
   class: AlphaFoldDB
   path: ~/scratch/protein-datasets/alphafold
-  species_start: 50
-  species_end: 50
+  species_start: 48
+  species_end: 48
   # species_id: 0
   # split_id: 1
   atom_feature: null
@@ -61,3 +61,6 @@ save_interval: 5
 
 train:
   num_epoch: 50
+
+logger:
+  wandb: True

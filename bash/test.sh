@@ -1,0 +1,4 @@
+SCRIPT_NAME=$(basename "$0")
+PRETRAINING_TASKNAME=$(echo "$SCRIPT_NAME" | cut -d'.' -f1)
+
+echo $PRETRAINING_TASKNAME

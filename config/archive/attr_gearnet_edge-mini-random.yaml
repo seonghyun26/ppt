@@ -17,14 +17,14 @@ dataset:
         random: True
 
 task:
-  class: AttributeMaskingRandomPoints
+  class: PrimitiveSpacePointMatching
   mask_rate: 0.15
   num_mlp_layer: 2
   model:
     class: GearNet
     input_dim: 21
-    # hidden_dims: [512, 512, 512, 512, 512, 512]
-    hidden_dims: [64, 64, 64, 64, 64, 64]
+    hidden_dims: [512, 512, 512, 512, 512, 512]
+    # hidden_dims: [64, 64, 64, 64, 64, 64]
     batch_norm: True
     concat_hidden: True
     short_cut: True

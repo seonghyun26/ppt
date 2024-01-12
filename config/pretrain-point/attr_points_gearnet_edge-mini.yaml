@@ -1,21 +1,30 @@
-output_dir: ~/scratch/protein_output
+output_dir: ~/scratch/protein_outputs
 
 dataset:
-  class: EnzymeCommission
-  path: ~/scratch/protein-datasets/
-  test_cutoff: 0.95
+  class: AlphaFoldDB
+  path: ~/scratch/protein-datasets/alphafold
+  species_start: 48
+  species_end: 48
   atom_feature: null
   bond_feature: null
   transform:
-    class: ProteinView
-    view: residue
+    class: Compose
+    transforms:
+      - class: ProteinView
+        view: residue
+      - class: TruncateProtein
+        max_length: 100
+        random: True
 
 task:
-  class: MultipleBinaryClassification
+  class: AttributeMaskingByPoints
+  mask_rate: 0.15
+  num_mlp_layer: 2
   model:
     class: GearNet
     input_dim: 21
     hidden_dims: [512, 512, 512, 512, 512, 512]
+    # hidden_dims: [64, 64, 64, 64, 64, 64]
     batch_norm: True
     concat_hidden: True
     short_cut: True
@@ -37,29 +46,17 @@ task:
         k: 10
         min_distance: 5
     edge_feature: gearnet
-  criterion: bce
-  num_mlp_layer: 3
-  metric: ['auprc@micro', 'f1_max']
-
 
 optimizer:
-  class: AdamW
-  lr: 1.0e-4
-  weight_decay: 0
-
-scheduler:
-  class: ReduceLROnPlateau
-  factor: 0.6
-  patience: 5
+  class: Adam
+  lr: 1.0e-3
 
 engine:
   gpus: {{ gpus }}
-  batch_size: 2
-  log_interval: 1000
+  batch_size: 96
+  log_interval: 100
 
-model_checkpoint: {{ ckpt }}
-
-metric: f1_max
+save_interval: 5
 
 train:
   num_epoch: 50

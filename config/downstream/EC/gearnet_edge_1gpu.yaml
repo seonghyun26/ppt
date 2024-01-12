@@ -62,3 +62,6 @@ metric: f1_max
 
 train:
   num_epoch: 50
+
+logger:
+  wandb: True

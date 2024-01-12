@@ -122,7 +122,7 @@ def build_downstream_solver(cfg, dataset):
     
     # NOTE: Configuration for wandb name
     run_name=""
-    if cfg.get("logger") is None or cfg.logger.get("wandb") is None:
+    if (cfg.get("logger") is not None or cfg.logger.get("wandb") == False):
         logger_type="logging"
     else:
         logger_type = "wandb"
@@ -190,7 +190,7 @@ def build_pretrain_solver(cfg, dataset):
     optimizer = core.Configurable.load_config_dict(cfg.optimizer)
     
     run_name=""
-    if cfg.logger.get("wandb") is None:
+    if (cfg.get("logger") is not None or cfg.logger.get("wandb") == False):
         logger_type="logging"
     else:
         logger_type = "wandb"

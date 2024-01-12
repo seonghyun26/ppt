@@ -5,27 +5,13 @@
   "version": "0.2.0",
   "configurations": [
     {
-      "name": "gear-pretrain-proteincode",
+      "name": "pretrainpoint-test",
       "type": "python",
       "request": "launch",
       "program": "./script/pretrain.py",
       "args": [
         "-c",
-        "config/pretrain/attr_gearnet_edge+proteincode.yaml",
-        "--gpus",
-        "[1]"
-      ],
-      "console": "integratedTerminal",
-      "justMyCode": false
-    },
-    {
-      "name": "pretrain-mini-test",
-      "type": "python",
-      "request": "launch",
-      "program": "./script/pretrain.py",
-      "args": [
-        "-c",
-        "config/pretrain/attr_gearnet_edge-mini-random.yaml",
+        "config/pretrain_points/attr_points_gearnet_edge-mini.yaml",
         "--gpus",
         "[0]"
       ],
@@ -33,7 +19,7 @@
       "justMyCode": false
     },
     {
-      "name": "pretrain-mini-original",
+      "name": "pretrain-original",
       "type": "python",
       "request": "launch",
       "program": "./script/pretrain.py",
@@ -47,7 +33,7 @@
       "justMyCode": false
     },
     {
-      "name": "downstream-ec",
+      "name": "ec",
       "type": "python",
       "request": "launch",
       "program": "./script/downstream.py",
