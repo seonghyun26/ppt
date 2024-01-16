@@ -11,7 +11,8 @@
       "program": "./script/pretrain.py",
       "args": [
         "-c",
-        "config/pretrain_points/attr_points_gearnet_edge-mini.yaml",
+        // "config/pretrain-point/attr_points_gearnet_edge-mini.yaml",
+        "config/pretrain-point/score_points_gearnet_edge-mini.yaml",
         "--gpus",
         "[0]"
       ],
@@ -19,21 +20,21 @@
       "justMyCode": false
     },
     {
-      "name": "pretrain-original",
+      "name": "pretrain-af10k",
       "type": "python",
       "request": "launch",
       "program": "./script/pretrain.py",
       "args": [
         "-c",
-        "config/pretrain/attr_gearnet_edge-mini.yaml",
+        "config/pretrain-point/attr_points_gearnet_edge-10k.yaml",
         "--gpus",
-        "[3]"
+        "[0]"
       ],
       "console": "integratedTerminal",
       "justMyCode": false
     },
     {
-      "name": "ec",
+      "name": "EC",
       "type": "python",
       "request": "launch",
       "program": "./script/downstream.py",

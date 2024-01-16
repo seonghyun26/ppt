@@ -122,16 +122,16 @@ def build_downstream_solver(cfg, dataset):
     
     # NOTE: Configuration for wandb name
     run_name=""
-    if (cfg.get("logger") is not None or cfg.logger.get("wandb") == False):
-        logger_type="logging"
-    else:
-        logger_type = "wandb"
-        if cfg.logger.get("name") is None:
-            task_branch = "-"+str(cfg.dataset["branch"]) if cfg.dataset.get("branch") is not None else ""
-            pretrainTask = "-"+str(cfg.model_checkpoint).split('/')[-5] if cfg.get("model_checkpoint") is not None else ""
-            run_name += str(cfg.dataset["class"]) + task_branch + pretrainTask
-        else:
-            run_name += cfg.logger["name"]
+    # if (cfg.get("logger") is not None or cfg.logger.get("wandb") == False):
+    #     logger_type="logging"
+    # else:
+        # if cfg.logger.get("name") is None:
+    logger_type = "wandb"
+    task_branch = "-"+str(cfg.dataset["branch"]) if cfg.dataset.get("branch") is not None else ""
+    pretrainTask = "-"+str(cfg.model_checkpoint).split('/')[-5] if cfg.get("model_checkpoint") is not None else ""
+    run_name += str(cfg.dataset["class"]) + task_branch + pretrainTask
+        # else:
+        #     run_name += cfg.logger["name"]
         
     solver = core.Engine(task, train_set, valid_set, test_set, optimizer, **cfg.engine, logger=logger_type, wandb_name=run_name)
 
@@ -189,15 +189,15 @@ def build_pretrain_solver(cfg, dataset):
     cfg.optimizer.params = [p for p in task.parameters() if p.requires_grad]
     optimizer = core.Configurable.load_config_dict(cfg.optimizer)
     
+    # if (cfg.get("logger") is not None or cfg.logger.get("wandb") == False):
+    #     logger_type="logging"
+    # else:
+        # if cfg.logger.get("name") is not None:
+        #     run_name += cfg.logger["name"]+"-"
     run_name=""
-    if (cfg.get("logger") is not None or cfg.logger.get("wandb") == False):
-        logger_type="logging"
-    else:
-        logger_type = "wandb"
-        if cfg.logger.get("name") is not None:
-            run_name += cfg.logger["name"]+"-"
-        pretrainTask = "-"+str(cfg.task["class"])
-        run_name += str(cfg.dataset["class"]) + pretrainTask
+    logger_type = "wandb"
+    pretrainTask = "-"+str(cfg.task["class"])
+    run_name += str(cfg.dataset["class"]) + pretrainTask
         
     solver = core.Engine(task, dataset, None, None, optimizer, **cfg.engine, logger=logger_type, wandb_name=run_name)
     
