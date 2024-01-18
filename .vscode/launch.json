@@ -5,16 +5,16 @@
   "version": "0.2.0",
   "configurations": [
     {
-      "name": "pretrainpoint-test",
+      "name": "pretrain-test",
       "type": "python",
       "request": "launch",
       "program": "./script/pretrain.py",
       "args": [
         "-c",
-        // "config/pretrain-point/attr_points_gearnet_edge-mini.yaml",
-        "config/pretrain-point/score_points_gearnet_edge-mini.yaml",
+        "config/pretrain/mc_gearnet_edge_rw.yaml",
+        // "config/pretrain-point/rand_noise_gearnet_edge-mini.yaml",
         "--gpus",
-        "[0]"
+        "[6]"
       ],
       "console": "integratedTerminal",
       "justMyCode": false
