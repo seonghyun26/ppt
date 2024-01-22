@@ -21,7 +21,7 @@ task:
   mask_rate: 0.15
   num_mlp_layer: 2
   model:
-    class: GearNet
+    class: GN
     input_dim: 21
     hidden_dims: [512, 512, 512, 512, 512, 512]
     # hidden_dims: [64, 64, 64, 64, 64, 64]

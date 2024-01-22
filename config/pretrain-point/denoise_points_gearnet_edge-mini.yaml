@@ -30,7 +30,8 @@ task:
     short_cut: True
     readout: 'sum'
     num_relation: 7
-    edge_input_dim: 59
+    # edge_input_dim: 59
+    edge_input_dim: 40
     num_angle_bin: 8
   graph_construction_model:
     class: GraphConstruction
@@ -45,7 +46,8 @@ task:
       - class: KNNEdge
         k: 10
         min_distance: 5
-    edge_feature: gearnet
+    # edge_feature: gearnet
+    edge_feature: residue_type
 
 optimizer:
   class: Adam

@@ -11,10 +11,11 @@
       "program": "./script/pretrain.py",
       "args": [
         "-c",
-        "config/pretrain/mc_gearnet_edge_rw.yaml",
-        // "config/pretrain-point/rand_noise_gearnet_edge-mini.yaml",
+        // "config/pretrain/mc_gearnet_edge_rw.yaml",
+        "config/pretrain-point/attr_points_gearnet_edge-mini.yaml",
+        // "config/pretrain-point/attr_point_set_gearnet_edge-mini.yaml",
         "--gpus",
-        "[6]"
+        "[0]"
       ],
       "console": "integratedTerminal",
       "justMyCode": false

@@ -17,7 +17,7 @@ dataset:
         random: True
 
 task:
-  class: AttributeMaskingByPoints
+  class: AttributeMaskingByPointsSet
   mask_rate: 0.15
   num_mlp_layer: 2
   model:
